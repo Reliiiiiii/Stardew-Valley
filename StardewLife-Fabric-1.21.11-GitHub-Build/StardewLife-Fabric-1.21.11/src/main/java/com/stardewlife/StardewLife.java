@@ -67,7 +67,8 @@ public final class StardewLife implements ModInitializer {
                 .then(Commands.literal("farmlevel").executes(ctx -> farmLevel(ctx.getSource())))
                 .then(Commands.literal("farmxp")
                     .then(Commands.argument("amount", IntegerArgumentType.integer(1, 1000))
-                        .requires(s -> s.hasPermission(2))
+                        .requires(s -> s.getEntity() instanceof ServerPlayer p
+        && s.getServer().getPlayerList().isOp(p.getGameProfile()))
                         .executes(ctx -> addFarmXp(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "amount")))))
                 .then(Commands.literal("shop")
                     .then(Commands.literal("list").executes(ctx -> shopList(ctx.getSource())))
@@ -169,7 +170,9 @@ public final class StardewLife implements ModInitializer {
     private static void setScore(CommandSourceStack s, ServerPlayer p, String obj, int value) {
         run(s, "scoreboard players set " + safeName(p) + " " + obj + " " + Math.max(0, value));
     }
-    private static String safeName(ServerPlayer p) { return p.getGameProfile().getName().replaceAll("[^A-Za-z0-9_]", "_"); }
+    private static String safeName(ServerPlayer p) {
+    return p.getGameProfile().name().replaceAll("[^A-Za-z0-9_]", "_");
+}
     private static void run(CommandSourceStack s, String command) {
         try { s.getServer().getCommands().performPrefixedCommand(s, command); } catch (Exception ignored) {}
     }
