@@ -225,7 +225,7 @@ public final class StardewLife implements ModInitializer {
     private static int sellHand(CommandSourceStack s){return sell(s,false);}
     private static int shipHand(CommandSourceStack s){return sell(s,true);}
     private static int sell(CommandSourceStack s, boolean ship) {
-        ServerPlayer p=s.getPlayer(); ItemStack stack=p.getInventory().getSelected();
+        ServerPlayer p=s.getPlayer(); ItemStack stack=p.getMainHandItem();
         if(stack.isEmpty()){s.sendFailure(Component.literal("Pegang item yang ingin dijual di tangan utama."));return 0;}
         String id=BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
         int price=SELL.getOrDefault(id,0), count=stack.getCount();
@@ -275,7 +275,7 @@ public final class StardewLife implements ModInitializer {
     private static int gift(CommandSourceStack s,String raw) {
         ServerPlayer p=s.getPlayer(); String v=normalizeVillager(raw);
         if(v==null){s.sendFailure(Component.literal("Nama villager tidak dikenal."));return 0;}
-        ItemStack stack=p.getInventory().getSelected();
+        ItemStack stack=p.getMainHandItem();
         if(stack.isEmpty()){s.sendFailure(Component.literal("Pegang item hadiah di tangan utama."));return 0;}
         String id=BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
         int points=id.contains("flower")||id.contains("cake")?80:id.contains("diamond")?100:id.contains("bread")||id.contains("apple")?35:15;
