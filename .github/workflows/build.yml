@@ -1,0 +1,11 @@
+      - name: Build mod
+        run: gradle build --no-daemon
+        working-directory: StardewLife-Fabric-1.21.11-GitHub-Build/StardewLife-Fabric-1.21.11
+
+      - name: Upload JAR files
+        uses: actions/upload-artifact@v4
+        with:
+          name: StardewLife-Fabric-1.21.11-JAR
+          path: StardewLife-Fabric-1.21.11-GitHub-Build/StardewLife-Fabric-1.21.11/build/libs/*.jar
+          if-no-files-found: error
+          retention-days: 14
