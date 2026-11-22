@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "stardewlife",
+  "version": "${version}",
+  "name": "Stardew Life",
+  "description": "A cozy farming-life gameplay prototype with seasons, shop, shipping, energy, farming XP and villager friendship.",
+  "authors": [
+    "Stardew Life Team"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.stardewlife.StardewLife"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
