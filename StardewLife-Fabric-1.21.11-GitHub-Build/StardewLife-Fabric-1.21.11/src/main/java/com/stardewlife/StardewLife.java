@@ -203,7 +203,9 @@ public final class StardewLife implements ModInitializer {
         int xp=getScore(s,p,FARM_XP)+amount, lvl=getScore(s,p,FARM_LVL);
         while (xp >= (lvl+1)*100 && lvl < 10) { xp -= (lvl+1)*100; lvl++; }
         setScore(s,p,FARM_XP,xp); setScore(s,p,FARM_LVL,lvl);
-        s.sendSuccess(() -> Component.literal("§a+" + amount + " Farming XP §7| Level sekarang: " + lvl), false); return 1;
+        int currentLvl = lvl;
+        s.sendSuccess(() -> Component.literal("§a+" + amount + " Farming XP §7| Level sekarang: " + currentLvl), false);
+        return 1;
     }
     private static int shopList(CommandSourceStack s) {
         String season=currentSeason(s);
