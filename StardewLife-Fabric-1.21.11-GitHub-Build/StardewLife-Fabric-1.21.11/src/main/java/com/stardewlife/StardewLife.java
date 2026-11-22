@@ -68,7 +68,12 @@ public final class StardewLife implements ModInitializer {
                 .then(Commands.literal("farmxp")
                     .then(Commands.argument("amount", IntegerArgumentType.integer(1, 1000))
                         .requires(s -> s.getEntity() instanceof ServerPlayer p
-        && s.getServer().getPlayerList().isOp(p.getGameProfile()))
+        && s.getServer().getPlayerList().isOp(
+                new net.minecraft.server.players.NameAndId(
+                        p.getGameProfile().id(),
+                        p.getGameProfile().name()
+                )
+        ))
                         .executes(ctx -> addFarmXp(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "amount")))))
                 .then(Commands.literal("shop")
                     .then(Commands.literal("list").executes(ctx -> shopList(ctx.getSource())))
